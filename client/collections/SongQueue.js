@@ -4,6 +4,16 @@ var SongQueue = Songs.extend({
 
   initialize: function(){
 
+    this.listenTo(this, 'add', function(model){
+      if( this.length === 1 ) this.playFirst();
+    }, this);
+
+  },
+
+  playFirst: function() {
+    console.log( this );
+    console.log( this.models[0] );
+    this.trigger('playFirst', this.models[0]);
   }
 
 });

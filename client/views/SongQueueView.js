@@ -7,32 +7,17 @@ var SongQueueView = Backbone.View.extend({
     this.render();
   },
 
-  // attach: function( song ){
-  //   console.log( song );
-  //   this.render(song);
-//    this.$el.html(
-//      new SongQueueEntryView( song ).render()
-//    );
-  // },
-
   render: function( song ){
     if( !song ){
+      // to preserve event handlers on child nodes, we must call .detach() on them before overwriting with .html()
+      // see http://api.jquery.com/detach/
       this.$el.children().detach();
-      this.$el.html('<th> Playlist </th>');
+      this.$el.html('<th>Playlist</th>');
     }
     else {
-      this.$el.children().detach();
-      this.$el.html().append(
+      this.$el.append(
         new SongQueueEntryView( song ).render());
     }
-    // to preserve event handlers on child nodes, we must call .detach() on them before overwriting with .html()
-    // see http://api.jquery.com/detach/
-
-    //     .append(
-    //     this.collection.map(function(song){
-    //     new SongQueueEntryView( song ).render()
-    //     })
-    // );
   }
 
 });
